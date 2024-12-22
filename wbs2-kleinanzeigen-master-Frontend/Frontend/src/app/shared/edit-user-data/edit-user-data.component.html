@@ -1,0 +1,43 @@
+<div class="d-flex mb-5 flex-lg-row flex-column justify-content-between">
+    <div class="col-lg-4 px-2">
+        <button
+            (click)="openPersoenlicheDatenAendern()"
+            class="btn w-100 fw-bold fs-5 pb-3 pt-3">
+            Persönliche Daten ändern
+        </button>
+    </div>
+    <div class="col-lg-4 px-2">
+        <button
+            (click)="openPasswortAendern()"
+            class="btn btn-blue w-100 fw-bold fs-5 pb-3 pt-3">
+            Passwort ändern
+        </button>
+    </div>
+    <div class="col-lg-4 px-2">
+        <button
+            class="btn btn-danger w-100 fw-bold fs-5 pb-3 pt-3"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdropDeleteUser">
+            Konto löschen
+        </button>
+    </div>
+</div>
+
+<!-- Modal Delete User-->
+<div class="modal fade" id="staticBackdropDeleteUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-body border-0 mt-4">
+<p>Wollen Sie das Konto wirklich löschen ?</p>
+</div>
+<div class="modal-footer border-0">
+<button type="button" class="btn" data-bs-dismiss="modal">zurück</button>
+<button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+(click)="handleDeleteConfirm()">löschen</button>
+</div>
+
+</div>
+</div>
+</div>

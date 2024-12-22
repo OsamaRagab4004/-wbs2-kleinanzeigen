@@ -1,0 +1,72 @@
+<section class="border border-dark rounded-3">
+  <div class="container">
+    <div class="old d-flex flex-column mt-3 mb-3">
+      <label for="oldpass1">Altes Passwort</label>
+      <input
+        class="form-control"
+        [type]="showOldPassword ? 'text' : 'password'"
+        id="oldpass"
+        [(ngModel)]="this.oldPassword"
+      />
+      <div class="px-0 py-2 d-flex justify-content-end gap-2">
+        <label for="showOldPassword">Passwort anzeigen</label>
+        <input
+          type="checkbox"
+          id="showOldPassword"
+          class="form-check-input"
+          (click)="toggleShowOldPassword()"
+        />
+      </div>
+      <div class="text-danger" *ngIf="this.error && this.error === 403">
+        Passwort falsch!
+      </div>
+    </div>
+    <div class="newpass d-flex flex-column mb-3">
+      <label for="new">Neues Passwort</label>
+      <input
+        class="form-control"
+        [type]="showNewPassword ? 'text' : 'password'"
+        id="new"
+        [(ngModel)]="this.newPassword"
+      />
+      <div class="px-0 py-2 d-flex justify-content-end gap-2">
+        <label for="showNewPassword">Passwort anzeigen</label>
+        <input
+          type="checkbox"
+          id="showNewPassword"
+          class="form-check-input"
+          (click)="toggleShowNewPassword()"
+        />
+      </div>
+      <div class="text-danger" *ngIf="this.error && this.error === 400">
+        Passwörter stimmen nicht überein
+      </div>
+    </div>
+    <div class="repeat d-flex flex-column mb-3">
+      <label for="rep"> Neues Passwort wiederholen </label>
+      <input
+        class="form-control"
+        [type]="showNewRepeatPassword ? 'text' : 'password'"
+        id="rep"
+        [(ngModel)]="this.newPasswordRepeat"
+      />
+      <div class="px-0 py-2 d-flex justify-content-end gap-2">
+        <label for="showNewRepeatPassword">Passwort anzeigen</label>
+        <input
+          type="checkbox"
+          id="showNewRepeatPassword"
+          class="form-check-input"
+          (click)="toggleShowNewRepeatPassword()"
+        />
+      </div>
+      <div class="text-danger" *ngIf="this.error && this.error === 400">
+        Passwörter stimmen nicht überein
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mb-4">
+      <button class="w-50 btn btn-blue mt-1 mb-1" (click)="savePassword()">
+        Speichern
+      </button>
+    </div>
+  </div>
+</section>

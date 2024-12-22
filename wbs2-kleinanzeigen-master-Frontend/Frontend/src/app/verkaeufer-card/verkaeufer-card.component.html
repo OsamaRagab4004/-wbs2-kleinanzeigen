@@ -1,0 +1,10 @@
+<div
+    class="box1 p-3 rounded-3 d-flex justify-content-center align-items-center flex-column">
+    <div class="title mb-4 text-center flex-grow-1 d-flex align-items-center">
+        <h6>{{ verkaeufer?.vorname }} {{ verkaeufer?.nachname }}</h6>
+    </div>
+    <div class="d-flex flex-row gap-4">
+        <i class="fa-solid fa-person-walking pointer" (click)="goToProducts()"></i>
+        <i class="fa-solid fa-dumpster pointer" (click)="merklisteEntfernen()"></i>
+    </div>
+</div>

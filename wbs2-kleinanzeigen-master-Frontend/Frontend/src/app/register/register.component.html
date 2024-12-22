@@ -1,0 +1,179 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-center d-flex align-content-center">
+    <form class="row w-50" (ngSubmit)="register()">
+      <div class="row px-0 mx-0 mb-2">
+        <label for="firstname" class="ps-0 fw-semibold"
+          >Vorname<span class="text-danger">*</span></label
+        >
+        <input
+          [formControl]="vorname"
+          id="firstname"
+          name="vorname"
+          class="rounded-3 py-1"
+          type="text"
+        />
+        <div
+          class="text-danger fw-normal px-0"
+          *ngIf="vorname.invalid && (vorname.dirty || vorname.touched)"
+        >
+          <div *ngIf="vorname.errors?.['required']">
+            Vorname ist ein Pflichtfeld
+          </div>
+        </div>
+      </div>
+      <div class="row px-0 mx-0 mb-2">
+        <label for="lastname" class="ps-0 fw-semibold">Nachname </label>
+        <input
+          [formControl]="nachname"
+          id="lastname"
+          name="nachname"
+          class="rounded-3 py-1"
+          type="text"
+        />
+      </div>
+
+      <div class="row px-0 mx-0 mb-2">
+        <label for="email" class="ps-0 fw-semibold"
+          >E-mail<span class="text-danger">*</span>
+        </label>
+        <input
+          [formControl]="email"
+          id="email"
+          name="email"
+          class="rounded-3 py-1"
+          type="email"
+        />
+        <div
+          class="text-danger fw-normal px-0"
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+        >
+          <div *ngIf="email.errors?.['required']">
+            Email ist ein Pflichtfeld
+          </div>
+          <div *ngIf="email.errors?.['email']">
+            Email ist nicht in richtigem Format
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="istVerkaeufer.value" class="row px-0 mx-0 mb-2">
+        <label for="telephone" class="ps-0 fw-semibold"
+          >Telefonnummer<span class="text-danger">*</span></label
+        >
+        <input
+          [formControl]="telefonNummer"
+          id="telephone"
+          name="telefonNummer"
+          class="rounded-3 py-1"
+          type="tel"
+        />
+        <div
+          class="text-danger fw-normal px-0"
+          *ngIf="
+            telefonNummer.invalid &&
+            (telefonNummer.dirty || telefonNummer.touched)
+          "
+        >
+          <div *ngIf="telefonNummer.errors?.['required']">
+            Telefonnummer ist ein Pflichtfeld
+          </div>
+        </div>
+      </div>
+
+      <div class="row px-0 mx-0 mb-2">
+        <label for="password" class="ps-0 fw-semibold"
+          >Passwort<span class="text-danger">*</span></label
+        >
+        <input
+          [formControl]="passwort"
+          id="password"
+          name="passwort"
+          class="rounded-3 py-1"
+          [type]="showPassword ? 'text' : 'password'"
+        />
+        <div class="px-0 py-2 d-flex justify-content-end gap-2">
+          <label for="showPassword">Passwort anzeigen</label>
+          <input
+            type="checkbox"
+            id="showPassword"
+            class="form-check-input"
+            (click)="toggleShowPassword()"
+          />
+        </div>
+        <div
+          class="text-danger fw-normal px-0"
+          *ngIf="passwort.invalid && (passwort.dirty || passwort.touched)"
+        >
+          <div *ngIf="passwort.errors?.['required']">
+            Passwort ist ein Pflichtfeld
+          </div>
+          <div *ngIf="passwort.errors?.['minlength']">
+            Passwortlänge soll mindestens aus 8 Zeichen bestehen
+          </div>
+        </div>
+      </div>
+
+      <div class="row px-0 mx-0 mb-2">
+        <label for="passwordWiederholen" class="ps-0 fw-semibold"
+          >Passwort wiederholen<span class="text-danger">*</span>
+        </label>
+        <input
+          [formControl]="passwortWiederholen"
+          id="passwordWiederholen"
+          name="passwortWiederholen"
+          class="rounded-3 py-1"
+          [type]="showPasswordWiederholen ? 'text' : 'password'"
+        />
+        <div class="px-0 py-2 d-flex justify-content-end gap-2">
+          <label for="showPasswordWiederholen">Passwort anzeigen</label>
+          <input
+            type="checkbox"
+            id="showPasswordWiederholen"
+            class="form-check-input"
+            (click)="toggleShowPasswordWiederholen()"
+          />
+        </div>
+        <div
+          class="text-danger fw-normal px-0"
+          *ngIf="
+            passwortWiederholen.invalid &&
+            (passwortWiederholen.dirty || passwortWiederholen.touched)
+          "
+        >
+          <div *ngIf="passwortWiederholen.errors?.['required']">
+            Passwort wiederholen ist ein Pflichtfeld
+          </div>
+          <div *ngIf="passwortWiederholen.errors?.['minlength']">
+            Passwortlänge soll mindestens aus 8 Zeichen bestehen
+          </div>
+          <div *ngIf="passwortWiederholen.errors?.['notSame']">
+            Passwoerter sind nicht gleich
+          </div>
+        </div>
+      </div>
+      <div class="d-flex gap-2 justify-content-end mx-0 px-0">
+        <label for="istVerkaeufer">Verkaufer</label>
+        <input
+          [formControl]="istVerkaeufer"
+          class="form-check-input"
+          type="checkbox"
+          id="istVerkaeufer"
+          name="istVerkaeufer"
+          aria-label="Checkbox for following text input"
+        />
+      </div>
+      <div class="d-flex justify-content-end pe-0">
+        <button
+          type="submit"
+          class="btn mt-4 rounded-3 border-dark fw-semibold register px-5"
+        >
+          Registrieren
+        </button>
+      </div>
+      <div *ngIf="istVerkaeufer.value" class="row px-0 mx-0 mb-2 mt-3">
+        Hinweis: Wenn Sie sich als Verkäufer registrieren, müssen Sie erst von
+        einem Admin freigeschaltet werden, um die verwenden zu können.
+      </div>
+    </form>
+  </div>
+</div>

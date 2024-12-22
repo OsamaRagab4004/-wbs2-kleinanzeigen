@@ -1,0 +1,70 @@
+<section class="border border-dark rounded-3">
+    <form class="container" method="POST" (ngSubmit)="sendRequest()" [formGroup]="form">
+        <div class="d-flex flex flex-row mt-3 mb-3 px-4 justify-content-between">
+            <div>ID</div>
+            <div>{{id}}</div>
+        </div>
+        <div class="form-group mt-3 mb-3 px-4 justify-content-between">
+            <label for="vorname">Vorname</label>
+            <input class="form-control rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="text" id="vorname"
+                name="vorname"
+                formControlName="vorname" />
+            <div *ngIf="vorname.errors" class="d-flex flex flex-row justify-content-end text-danger">
+                <div *ngIf="vorname.errors['required']" class="justify-content-end">Vorname ist ein Pflichtfeld</div>
+            </div>
+        </div>
+        <div class="form-group mt-3 mb-3 px-4 justify-content-between">
+            <label for="nachname">Nachname</label>
+            <input class="form-control rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="text" id="nachname"
+                name="nachname"
+                formControlName="nachname" />
+        </div>
+        <div class="form-group mt-3 mb-3 px-4 justify-content-between">
+            <label for="email">Email</label>
+            <input class="form-control rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="text" id="email" name="email"
+                formControlName="email" />
+            <div *ngIf="email.errors" class="d-flex flex flex-row mt-3 mb-3 px-4 justify-content-end text-danger">
+                <div *ngIf="email.errors['required']" class="justify-content-end">Email ist ein Pflichtfeld</div>
+                <div *ngIf="email.errors['isUsed']" class="justify-content-end">Email ist schon registriert</div>
+            </div>
+        </div>
+
+        <div *ngIf="nutzertyp === 'VERKAEUFER'">
+            <div class="form-group mt-3 mb-3 px-4 justify-content-between">
+                <label for="telefonNummer">Telefonnummer</label>
+                <input class="form-control rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="tel" id="telefonNummer"
+                    name="telefonNummer" formControlName="telefonNummer" />
+                <div *ngIf="telefonNummer.errors"
+                    class="d-flex flex flex-row mt-3 mb-3 px-4 justify-content-end text-danger">
+                    <div *ngIf="telefonNummer.errors['required']" class="justify-content-end">Telefonnummer ist ein
+                        Pflichtfeld</div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3 mb-3 px-4 justify-content-between">
+                <label for="standNummer">Standnummer</label>
+                <input class="form-control rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="number" id="standNummer"
+                    formControlName="standNummer" min="0">
+                <div *ngIf="standNummer.errors"
+                    class="d-flex flex flex-row mt-3 mb-3 px-4 justify-content-end text-danger">
+                    <div *ngIf="standNummer.errors['isUsed']" class="justify-content-end">Standnummer ist
+                        schon
+                        belegt</div>
+                    <div *ngIf="standNummer.errors['min']" class="justify-content-end">Standnummer ist invalid</div>
+                </div>
+            </div>
+
+
+            <div class="form-group d-flex mt-3 mb-3 px-4 justify-content-between align-items-center">
+                <label for="akzept">Akzeptieren</label>
+                <input class="form-check-input rounded-3 ps-2 pe-2 pt-1 pb-1 mt-2 text-end" type="checkbox" id="standNummer"
+                    formControlName="akzept">
+            </div>
+        </div>
+        <div class="d-flex flex flex-row mt-3 mb-3 px-4 flex-row gap-2">
+            <button class="btn btn-blue w-50 rounded-3 mt-1 mb-1" (click)="closeModal()">zurück</button>
+            <button class="btn w-50 rounded-3 mt-1 mb-1" [disabled]="!form.valid" type="submit">speichern</button>
+        </div>
+
+    </form>
+</section>

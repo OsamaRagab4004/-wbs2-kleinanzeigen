@@ -1,0 +1,24 @@
+<div class="container mt-5 ps-4">
+  <div class="row ps-5 border-bottom border-dark pb-5">
+    <p class="fw-bolder">Herzlich Wilkommen bei WebFlea</p>
+    <p>Hier finden sie ein umfangreiches Sortiment an Flohmarktartikeln</p>
+    <p>Viel Spaß beim Shoppen</p>
+  </div>
+  <div class="row mt-5">
+    <p class="ps-0 fw-bolder">Unsere Kategorien</p>
+  </div>
+  <div class="row justify-content-center">
+    <ng-container *ngFor="let category of categories">
+      <div
+        class="col-lg-2 col-md-4 col-sm-6 mb-3 pointer"
+        (click)="searchForCategory(category.name)"
+      >
+        <img
+          [src]="'../../assets/' + category.path"
+          class="rounded-5 w-100 mb-3"
+        />
+        <p class="text-center px-0 fw-bolder">{{ category.name }}</p>
+      </div>
+    </ng-container>
+  </div>
+</div>

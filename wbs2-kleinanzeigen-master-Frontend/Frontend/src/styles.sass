@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap'
+
+.pointer
+    cursor: pointer
+.btn:not(.btn-blue,.btn-danger)
+    background-color: #9acd32 !important
+    color: white
+    border: 1px solid rgba(0, 0, 0, 0) !important
+    transition: all 300 ease-in-out
+.btn:hover
+    background-color: white !important
+    color: #9acd32
+    border: 1px solid #9acd32 !important
+.btn:active
+    color: black !important
+    background-color: white !important
+    
+.btn.btn-danger
+    background-color: red
+    color: white
+    border: 1px solid rgba(0, 0, 0, 0) !important
+.btn.btn-danger:hover
+    background-color: white !important
+    color: red
+    border: 1px solid red !important
+
+
+
+.btn.btn-blue
+    background-color: #45b8cc
+    color: white
+    border: 1px solid rgba(0, 0, 0, 0) !important
+.btn.btn-blue:hover
+    background-color: white !important
+    color: #45b8cc
+    border: 1px solid #45b8cc !important
+.rounded-top-left
+    border-top-left-radius: var(--bs-border-radius) !important
+.rounded-top-right
+    border-top-right-radius: var(--bs-border-radius) !important
+
+.delete
+    position: absolute
+    top: 0
+    right: 0
+    transform: translateX(-100%) translateY(50%)
+    &:hover
+        transform: translateX(-100%) translateY(50%) scale(1.2)
+
+.no-overflow-x
+    overflow-x: hidden
+.height-500
+    min-height: 500px !important
+    max-height: 500px !important
+
+.scrollbar
+    --tw-bg-opacity: 1
+    scrollbar-width: none
+
+.scrollbar::-webkit-scrollbar
+    width: 0.25rem
+
+
+.scrollbar::-webkit-scrollbar-track
+    border-radius: 0.5rem
+
+
+.scrollbar::-webkit-scrollbar-thumb
+    --tw-bg-opacity: 1
+    border-radius: 0.5rem
+    background-color: rgb(250 250 250 / var(--tw-bg-opacity))
+
+
+.scrollbar::-webkit-scrollbar-track:hover
+    --tw-bg-opacity: 1
+    background-color: rgb(82 82 91 / var(--tw-bg-opacity))
+
+.verkauft
+    filter: grayscale(100%)

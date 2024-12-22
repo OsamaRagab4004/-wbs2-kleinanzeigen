@@ -1,0 +1,64 @@
+<div
+    class="rightpart border border-dark d-flex flex-column justify-content-between h-100">
+    <div #chat class="chat scrollbar top-part mb-5" *ngIf="messages.length">
+        <ng-container *ngFor="let message of messages">
+            <div
+                class="container d-flex"
+                [ngClass]="{
+          'justify-content-start':
+            ((message.absender === 'KAEUFER' || message.unregisteredKaeufer) &&
+              isVerkaeufer()) ||
+            (message.absender === 'VERKAEUFER' && isKaeufer()),
+          'justify-content-end':
+            (message.absender === 'VERKAEUFER' && isVerkaeufer()) ||
+            ((message.absender === 'KAEUFER' || message.unregisteredKaeufer) &&
+              isKaeufer())
+        }">
+                <div
+                    class="message d-flex flex-column"
+                    [ngClass]="message.absender === 'KAEUFER' ? 'user1' : 'user2'">
+                    <p
+                        class="mt-3 border border-dark p-3 border rounded-3 w-100"
+                        [ngClass]="{
+              'text-left':
+                message.absender === 'KAEUFER' ||
+                (message.unregisteredKaeufer && isVerkaeufer()) ||
+                (message.absender === 'VERKAEUFER' && isKaeufer()),
+              'text-right':
+                (message.absender === 'VERKAEUFER' && isVerkaeufer()) ||
+                message.absender === 'KAEUFER' ||
+                (message.unregisteredKaeufer && isKaeufer())
+            }">
+                        {{ message.inhalt }}
+                    </p>
+                    <span
+                        style="margin-top: -1rem"
+                        [ngClass]="{
+              'text-left':
+                message.absender === 'KAEUFER' ||
+                (message.unregisteredKaeufer && isVerkaeufer()) ||
+                (message.absender === 'VERKAEUFER' && isKaeufer()),
+              'text-right':
+                (message.absender === 'VERKAEUFER' && isVerkaeufer()) ||
+                message.absender === 'KAEUFER' ||
+                (message.unregisteredKaeufer && isKaeufer())
+            }">{{ getFormattedDate(message.erstelltAm) }}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div
+        *ngIf="chatId === 0"
+        class="h-100 w-100 d-flex justify-content-center align-items-center">
+        <h3>Wähle Chat aus um Nachrichten anzusehen</h3>
+    </div>
+    <div class="d-flex my-1" *ngIf="chatId !== 0">
+        <input
+            class="bottom-part container my-2 mx-2 rounded-3"
+            [(ngModel)]="text"
+            (keyup.enter)="send()" />
+        <button class="btn btn-primary py-0 me-3 send text-black" (click)="send()">
+            senden
+        </button>
+    </div>
+</div>

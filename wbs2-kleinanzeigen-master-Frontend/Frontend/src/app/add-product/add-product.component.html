@@ -1,0 +1,146 @@
+<section>
+  <div class="head mt-5 mb-5">
+    <h2>Neues Produkt hinzufügen</h2>
+  </div>
+  <form
+    [formGroup]="produktForm"
+    (ngSubmit)="submitForm()"
+    method="post"
+    class="body d-flex flex-column"
+  >
+    <div class="box d-flex flex-column mb-3">
+      <label for="name"> Name </label>
+      <input
+        type="text"
+        id="Name"
+        formControlName="name"
+        class="form-control ps-3 pt-1 pb-1"
+      />
+      <div *ngIf="name.errors" class="text-danger">
+        <div *ngIf="name.errors['required']">Name ist ein Pflichtfeld</div>
+      </div>
+    </div>
+    <div class="box d-flex flex-column mb-3">
+      <label for="price"> Preis </label>
+      <div class="input-group">
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          formControlName="preis"
+          id="price"
+          class="form-control ps-3 pt-1 pb-1 d-inline"
+        />
+        <label class="mx-3 mt-1">Verhandelbar</label>
+        <input
+          class="form-check-input mt-2 pt-3 rounded-2 d-inline"
+          type="checkbox"
+          value=""
+          formControlName="verhandelbar"
+          aria-label="Checkbox for following text input"
+        />
+      </div>
+      <div *ngIf="preis.errors" class="text-danger">
+        <div *ngIf="preis.errors['required']">Preis ist ein Pflichtfeld</div>
+        <div *ngIf="preis.errors['min']">Niedrigster Preis ist 0</div>
+      </div>
+    </div>
+    <div class="box d-flex flex-column my-3">
+      <label class="mt-2">Kategorie</label>
+      <select
+        class="form-control mt-2 py-1 px-1"
+        aria-label="Default select example"
+        formControlName="kategorie"
+      >
+        <option
+          *ngFor="let kategorie of kategorien"
+          value="{{ kategorie[1] }}"
+          class="py-1"
+        >
+          {{ kategorie[1] }}
+        </option>
+      </select>
+    </div>
+
+    <div class="box d-flex flex-column my-3">
+      <label for="description"> Beschreibung </label>
+      <textarea
+        type="text"
+        id="description"
+        class="form-control ps-3 pt-1 pb-1"
+        formControlName="beschreibung"
+      ></textarea>
+    </div>
+    <div class="box d-flex flex-column mb-3">
+      <label for="add-images"> Bilder hinzufügen </label>
+      <div class="file-input">
+        <input
+          type="file"
+          id="add-images"
+          accept="image/*"
+          multiple
+          class="form-control w-100"
+          (change)="updateFiles($event)"
+        />
+      </div>
+      <div *ngFor="let bildName of bilderName">
+        {{ bildName }}
+      </div>
+      <div class="d-flex flex-wrap p-2">
+        <div
+          *ngFor="let uploadedBild of uploadedBilder; let idx = index"
+          class="position-relative"
+        >
+          <i
+            class="fa-solid fa-xmark delete text-danger"
+            (click)="handleDeleteBild(uploadedBild)"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdropDeleteBild"
+          ></i>
+          <img class="thumbnail p-2" [src]="imageIdToUrl(uploadedBild)" />
+        </div>
+      </div>
+        <div class="px-0 py-2 d-flex justify-content-end gap-2">
+            <label for="istVerkaeuft">Ist verkauft?</label>
+            <input type="checkbox" id="istVerkauft" class="form-check-input" formControlName="istVerkauft"/>
+        </div>
+    </div>
+    <div class="foot d-flex justify-content-end">
+      <button type="submit" class="ps-5 pe-5 btn">
+        {{ produktId ? "Bearbeiten" : "Hinzufuegen" }}
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- Modal Reset Password-->
+<div
+  class="modal fade"
+  id="staticBackdropDeleteBild"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body border-0 mt-4">
+        <p>Wollen Sie das Bild wirklich loeschen?</p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn" data-bs-dismiss="modal">
+          Zurueck
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="handleDeleteBildConfirm()"
+        >
+          Loeschen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<nav
+    class="navbar navbar-expand-lg bg-body-tertiary mt-3 align-items-center mx-auto">
+    <div class="container justify-content-between">
+        <a class="navbar-brand me-4">
+            <img
+                src="../../assets/Screenshot 2023-01-11 180154.png"
+                routerLink="categories"
+                class="w-100 pointer" />
+        </a>
+
+        <form class="d-flex mt-4 border border-dark py-2 rounded-2 flex-nowrap align-items-center" role="search">
+            <div class="dropdown border-end">
+                <span
+                    class="categories rounded-start px-2 me-0"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <span *ngIf="!category?.length">Kategorien</span>
+                    <span *ngIf="category?.length !== 0">{{ category }}</span>
+                </span>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let item of categories">
+                        <a class="dropdown-item" (click)="setCategory(item)">{{ item }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="position-relative border-0 ms-0 mt-0 me-1">
+                <input
+                    class="me-2 ms-0  w-100 me-5 position-relative py-1 border-0 no-outline"
+                    type="search"
+                    placeholder=""
+                    aria-label="Search"
+                    [(ngModel)]="q"
+                    [ngModelOptions]="{ standalone: true }" />
+                <i
+                    class="fa-solid fa-magnifying-glass fs-5 position-absolute pointer"
+                    (click)="search()"></i>
+            </div>
+        </form>
+        <div class="flex d-flex justify-content-end flex-row-reverse">
+            <i
+                class="fa-solid fa-user ms-3 fs-1 mt-4 pointer"
+                routerLink="{{ homeLink }}"></i>
+            <button
+                class="btn mt-4 px-3 rounded-3 border-dark fw-semibold"
+                routerLink="/login"
+                *ngIf="user$.value === null">
+                Registrieren/Login
+            </button>
+            <button
+                class="btn btn-danger mt-4 px-3 rounded-3 border-dark fw-semibold"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                *ngIf="user$.value !== null">
+                Abmelden
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body border-0 mt-4">
+                <p>Wollen Sie sich wirklich abmelden?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn" data-bs-dismiss="modal">
+                    zurück
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    (click)="handleLogoutConfirm()">
+                    Abmelden
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

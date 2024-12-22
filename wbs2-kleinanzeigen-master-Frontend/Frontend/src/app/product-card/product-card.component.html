@@ -1,0 +1,23 @@
+<div class="box1 p-3 rounded-3">
+    <div
+        class="image-container mb-4 text-center rounded-3"
+        [ngClass]="produkt.istVerkauft ? 'verkauft' : ''"
+        (click)="navigateToProdukt(produkt.id)"
+        [ngStyle]="{
+      'background-image': bilder.length ? 'url(' + bilder[0] + ')' : 'url()'
+    }"></div>
+    <div class="title mb-4 text-center">
+        <h6>{{ produkt.name }}</h6>
+    </div>
+    <div class="price text-center">
+        <p *ngIf="!produkt.istVerkauft" class="fw-bold">
+            {{ produkt.preis }}€ {{ produkt?.verhandelbar ? "VB" : "" }}
+        </p>
+        <p *ngIf="produkt.istVerkauft" class="fw-bold">
+            Verkauft
+        </p>
+    </div>
+    <ng-container>
+        <i *ngIf="!allowRemoval" class="fa-solid fa-dumpster" (click)="handleRemoveProduct()"></i>
+    </ng-container>
+</div>

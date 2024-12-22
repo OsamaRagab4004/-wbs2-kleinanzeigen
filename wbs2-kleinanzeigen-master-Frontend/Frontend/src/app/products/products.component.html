@@ -1,0 +1,51 @@
+<section class="mb-5">
+  <div
+    class="head flex-column flex-lg-row flex-md-row d-flex justify-content-lg-between justify-content-md-between justify-content-center gap-3 mt-5 mb-5"
+  >
+    <div
+      class="box diss rounded-3 border border-opacity-0 dropdown"
+      style="width: 300px"
+      ngbDropdown
+    >
+      <button class="btn btn-outline-primary w-100" ngbDropdownToggle [disabled]="this.minPreis >= this.maxPreis">
+        Von {{ value }}€ - {{ highValue }}€
+      </button>
+      <div ngbDropdownMenu>
+        <div
+          class="d-flex flex-column justify-content-center p-3 align-items-center"
+          style="width: 300px"
+        >
+          <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+          <button
+            class="btn btn-primary mt-4 text-center"
+            (click)="applyPreis()"
+            ngbDropdownItem
+          >
+            Anwenden
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="box diss rounded-3 border border-opacity-0" ngbDropdown>
+      <button class="btn btn-outline-primary w-100" ngbDropdownToggle [disabled]="this.minPreis >= this.maxPreis">
+        Sortieren nach
+      </button>
+      <div ngbDropdownMenu>
+        <button ngbDropdownItem (click)="applyOrder('ASC')">Aufsteigend</button>
+        <button ngbDropdownItem (click)="applyOrder('DESC')">Absteigend</button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="body hide d-flex justify-content-around flex-column flex-lg-row gap-3 flex-wrap"
+  >
+    <ng-container *ngIf="produkte.length">
+      <ng-container *ngFor="let produkt of produkte">
+        <app-product-card [allowRemoval]="true" [produkt]="produkt"></app-product-card>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!produkte.length">
+      <h3>Zu Ihrer Suche wurden leider keine Treffer gefunden!</h3>
+    </ng-container>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+<section class="d-flex flex-column flex-lg-row flex-md-row">
+    <div class="col-lg-8 d-flex flex-column">
+        <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-bs-ride="true">
+            <div class="carousel-indicators d-flex gap-2">
+                <ng-container *ngFor="let bild of bilder; let i = index">
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        [attr.data-bs-slide-to]="i"
+                        [ngClass]="i === 0 ? 'active' : 'inactive'">
+                        <img [src]="bild" class="d-block w-25" alt="..." [ngClass]="produkt.istVerkauft ? 'verkauft' : ''"/>
+                    </button>
+                </ng-container>
+            </div>
+            <div class="carousel-inner">
+                <ng-container *ngFor="let bild of bilder; let i = index">
+                    <div
+                        class="carousel-item"
+                        [ngClass]="i === 0 ? 'active' : 'inactive'">
+                        <img [src]="bild" class="d-block w-75 h-50" alt="..." [ngClass]="produkt.istVerkauft ? 'verkauft' : ''"/>
+                    </div>
+                </ng-container>
+            </div>
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-5">
+        <div
+            class="head border ps-3 pe-3 pt-2 pb-2 border-dark mb-4 rounded-3 d-flex flex-column justify-content-between">
+            <div>
+                <h3>{{ produkt.name }}</h3>
+                <p *ngIf="!produkt.istVerkauft" class="fs-2 fw-bold">
+                    {{ produkt.preis }}€ {{ produkt.verhandelbar ? "VB" : "" }}
+                </p>
+                <p *ngIf="produkt.istVerkauft" class="fs-2 fw-bold">
+                    Verkauft
+                </p>
+                <h5>Beschreibung</h5>
+                <p class="mb-5 text-wrap text-break">{{ produkt.beschreibung }}</p>
+            </div>
+            <div class="body mb-4" (click)="merkenAction()">
+                <button
+                    class="w-100 rounded-3 pt-1 pb-1 btn btn-outline-primary d-flex align-items-center gap-2 justify-content-center"
+                    [ngClass]="produktGemerkt ? 'btn-blue' : ''">
+                    <i class=" fa-regular fa-heart fs-3"></i>
+                    <ng-container *ngIf="!produktGemerkt"> Produkt merken </ng-container>
+                    <ng-container *ngIf="produktGemerkt">
+                        Produkt nicht mehr merken
+                    </ng-container>
+                </button>
+            </div>
+        </div>
+        <div
+            class="border ps-3 pe-3 pt-2 pb-2 border-dark mb-4 rounded-3 d-flex flex-column justify-content-between">
+            <div
+                class="d-flex justify-content-center flex-column align-center text-center p-3">
+                <h3>
+                    {{ produkt?.verkaeufer?.vorname }}
+                </h3>
+                <h3>{{ produkt?.verkaeufer?.nachname }}</h3>
+            </div>
+            <div class="body mb-4 mt-5" >
+                <button (click)="verkaeuferMerkenAction()" class="w-100 rounded-3 pt-1 pb-1 btn btn-outline-primary d-flex align-items-center gap-2 justify-content-center"
+                [ngClass]="verkaeuferGermerkt ? 'btn-blue' : ''">
+                    <i class="fa-regular fa-heart fs-3"></i>
+                    <ng-container *ngIf="!verkaeuferGermerkt">
+                        Verkäufer Merken
+                    </ng-container>
+                    <ng-container *ngIf="verkaeuferGermerkt">
+                        Verkäufer nicht mehr Merken
+                    </ng-container>
+                </button>
+                <button
+                    (click)="openVerticallyCentered()"
+                    class="w-100 rounded-3 pt-1 pb-1 btn btn-outline-primary mt-3">
+                    Mit Verkäufer Chatten
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

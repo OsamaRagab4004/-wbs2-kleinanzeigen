@@ -1,0 +1,63 @@
+<section>
+    <div class="container">
+        <div class="row mb-5 align-items-stretch justify-content-stretch">
+            <div class="col-lg-3">
+                <div
+                    class="leftpart chat scrollbar"
+                    [ngClass]="!chats.length ? 'border-top border-dark' : ''">
+                    <ng-container *ngFor="let chat of chats; let last = last">
+                        <div
+                            class="chat-info d-flex flex-column"
+                            (click)="changeChat(chat.id)">
+                            <div
+                                class="info border-top border-bottom border-dark ps-2 m-0 pointer">
+                                <h4>
+                                    {{ chat.produkt.verkaeufer.vorname }}
+                                    {{ chat.produkt.verkaeufer.nachname }}
+                                </h4>
+                                <p class="time">{{ chat.produkt.name }}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!chats.length">
+                        <div class="h-100 d-flex justify-content-center align-items-center">
+                            <h4>Noch keine Chats :/</h4>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col-lg-9 chat">
+                <app-chat [chatId]="selectedChat" [role]="'KAEUFER'"></app-chat>
+            </div>
+        </div>
+        <div class="d-flex gap-2 mb-5 flex-lg-row flex-column">
+            <div class="col-lg-3">
+                <button
+                    routerLink="/register"
+                    class="personal-data w-100 ps-2 pe-2 pt-3 pb-3 rounded-3 fw-bold fs-5">
+                    Registrieren
+                </button>
+            </div>
+        </div>
+        <div class="you-product fw-bold mb-5">
+            <p>Gemerkte Produkte</p>
+        </div>
+        <div class="d-flex justify-content-around flex-column flex-lg-row gap-3">
+            <ng-container *ngFor="let produkt of markierteProdukte">
+                <app-product-card
+                    [produkt]="produkt"
+                    (removeProduct)="removeItem($event)"></app-product-card>
+            </ng-container>
+        </div>
+        <div class="you-product fw-bold mb-5">
+            <p>Gemerkte Verkäufer</p>
+        </div>
+        <div class="d-flex justify-content-around flex-column flex-lg-row gap-3">
+            <ng-container *ngFor="let verkaeufer of markierteVerkaeufer">
+                <app-verkaeufer-card
+                    [verkaeufer]="verkaeufer"
+                    (removedFromWishlist)="removeVerkaeufer($event)"></app-verkaeufer-card>
+            </ng-container>
+        </div>
+    </div>
+</section>

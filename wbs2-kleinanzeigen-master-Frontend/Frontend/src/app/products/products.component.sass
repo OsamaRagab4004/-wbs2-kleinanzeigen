@@ -1,0 +1,26 @@
+@import "../../sass/_variables.sass"
+
+select
+	width: 200px
+.box
+	border: 1px solid black
+img
+	border: 1px solid black
+.box1
+	position: relative
+	border: 1px solid black
+	cursor: pointer
+	
+.boxnone
+	.box1
+		&::before
+			display: none
+.x
+	top:3%
+	left:38%
+	width: 120px
+	background-color: transparent
+
+.dropdown ::ng-deep range-slider
+	width: 200px !important
+	display: inline-block
